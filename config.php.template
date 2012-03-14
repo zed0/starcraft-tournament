@@ -1,0 +1,11 @@
+<?php
+
+$mysql_user = '';
+$mysql_password = '';
+$mysql_db = '';
+$mysql_prefix = 'tournament_';
+
+$mysqli = new mysqli("localhost", $mysql_user, $mysql_password, $mysql_db);
+
+$title = 'UWCS Starcraft Tournament';
+$cookie_name = 'tournamentlogin';
