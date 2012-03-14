@@ -1,0 +1,1 @@
+To get started rename 'config.php.template' to 'config.php' and change the options apropriately then run `php install.php`.
