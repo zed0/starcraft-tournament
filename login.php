@@ -6,7 +6,7 @@ $error = false;
 $errors = array();
 if (isset($_POST['submit'])) {
 	if (isset($_POST['login']) && $_POST['login'] != '') {
-		$login = $_POST['login'];
+		$logindetails = $_POST['login'];
 	} else {
 		$error = true;
 		array_push($errors, "Enter your login");
@@ -20,20 +20,20 @@ if (isset($_POST['submit'])) {
 	}
 
 	if (!$error) {
-		if ($result = $mysqli->query("SELECT id, password FROM " . $mysql_prefix . "player WHERE login='".$mysqli->real_escape_string($login)."' LIMIT 0,1")) {
+		if ($result = $mysqli->query("SELECT id, salt, password FROM " . $mysql_prefix . "player WHERE login='".$mysqli->real_escape_string($logindetails)."' LIMIT 0,1")) {
 			$error = true;
 			array_push($errors, "Invalid login");
 			while ($row = $result->fetch_assoc()) {
-				$salt = substr($row['password'], 0, 10);
-				if ($salt.sha1($password.$salt) == $row['password']) {
+				if (hash('sha256',$row['salt'].$password) == $row['password']) {
 					$error = false;
-					setcookie($cookie_name, base64_encode($login).":".sha1($login.$row['password']));
+					setcookie($cookie_name, base64_encode($logindetails).":".sha1($logindetails.$row['password']));
+					//$login = $logindetails;
 
 					header('Location: .');
 					exit();
 				} else {
 					$error = true;
-					$errors = array("Incorrect password");
+					$errors = array("Invalid login");
 				}
 			}
 		} else {

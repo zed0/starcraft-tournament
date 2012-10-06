@@ -22,33 +22,35 @@ body {
 	margin-left: auto;
 	margin-right: auto;
 	padding: 20px;
-	opacity: 0.95;
+	opacity: 0.8;
 	border-left: 1px solid #66AAFF;
 	border-top: 1px solid #66AAFF;
-	/* IE10 */ 
-	background-image: -ms-radial-gradient(center top, ellipse farthest-side, #41A1C4 0%, #07101F 100%);
+/* IE10 */ 
+background-image: url(./static/SC2Background.png), -ms-linear-gradient(top, #014B75 0%, #000000 100%);
 
-	/* Mozilla Firefox */ 
-	background-image: -moz-radial-gradient(center top, ellipse farthest-side, #41A1C4 0%, #07101F 100%);
+/* Mozilla Firefox */ 
+background-image: url(./static/SC2Background.png), -moz-linear-gradient(top, #014B75 0%, #000000 100%);
 
-	/* Opera */ 
-	background-image: -o-radial-gradient(center top, ellipse farthest-side, #41A1C4 0%, #07101F 100%);
+/* Opera */ 
+background-image: url(./static/SC2Background.png), -o-linear-gradient(top, #014B75 0%, #000000 100%);
 
-	/* Webkit (Safari/Chrome 10) */ 
-	background-image: -webkit-gradient(radial, center top, 0, center top, 488, color-stop(0, #41A1C4), color-stop(1, #07101F));
+/* Webkit (Safari/Chrome 10) */ 
+background-image: url(./static/SC2Background.png), -webkit-gradient(linear, left top, left bottom, color-stop(0, #014B75), color-stop(1, #000000));
 
-	/* Webkit (Chrome 11+) */ 
-	background-image: -webkit-radial-gradient(center top, ellipse farthest-side, #41A1C4 0%, #07101F 100%);
+/* Webkit (Chrome 11+) */ 
+background-image: url(./static/SC2Background.png), -webkit-linear-gradient(top, #014B75 0%, #000000 100%);
 
-	/* Proposed W3C Markup */ 
-	background-image: radial-gradient(center top, ellipse farthest-side, #41A1C4 0%, #07101F 100%);
+/* Proposed W3C Markup */ 
+background-image: url(./static/SC2Background.png), linear-gradient(top, #014B75 0%, #000000 100%);
+	background-repeat: no-repeat;
 }
 
 html {
 	padding: 0 0 0 40px;
 	margin: 0;
 	text-align: center;
-	background: #000000 url(http://zed0.co.uk/Misc/Wallpapers/Misconstrue_-_Image_1.jpg) no-repeat center;\n");
+	background: #000000 url(./static/sc2background.jpg) no-repeat center;
+	background-position: top;
 }
 
 h1 {
@@ -62,8 +64,18 @@ h1 a:link, h1 a:visited {
 	text-decoration: none;
 }
 
+h1 a:hover {
+	text-shadow: #FFFFFF 0px 0px 25px;
+}
+
 a:link, a:visited {
+	text-decoration: none;
 	color: #66AAFF;
+}
+
+a:hover {
+	color: #88CCFF;
+	text-shadow: #FFFFFF 0px 0px 10px;
 }
 
 #nav {
@@ -74,6 +86,7 @@ a:link, a:visited {
 
 #nav li {
 	display: inline;
+	padding: 0 20px;
 }
 
 label {

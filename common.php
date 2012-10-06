@@ -44,7 +44,6 @@ if (isset($_COOKIE[$cookie_name])) {
 			}
 		}
 	}
-	
 	if ($loginfail) {
 		unset($login);
 		setcookie ($cookie_name, "", time() - 3600);

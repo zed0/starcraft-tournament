@@ -43,20 +43,24 @@ if (isset($_POST['submit'])) {
 	}
 
 	if (!$error) {
-		$salt = substr(md5(mt_rand()),0,10);
-		$password = $salt.sha1($password.$salt);
-		if ($result = $mysqli->query("INSERT INTO " . $mysql_prefix . "player(login, password, name, ircnick, email) VALUES ('".$mysqli->real_escape_string($login)."','".$password."',
-'".$mysqli->real_escape_string($name)."',
-'".$mysqli->real_escape_string($irc)."',
-'".$mysqli->real_escape_string($email)."')")) {
+		$salt = hash('sha256', mcrypt_create_iv(20));
+		$passwordHash = hash('sha256', $salt.$password);
+		if ($result = $mysqli->query("INSERT INTO " . $mysql_prefix . "player(login, password, salt, name, ircnick, email) VALUES (
+			'".$mysqli->real_escape_string($login)."',
+			'".$passwordHash."',
+			'".$salt."',
+			'".$mysqli->real_escape_string($name)."',
+			'".$mysqli->real_escape_string($irc)."',
+			'".$mysqli->real_escape_string($email)."')")) {
 
 ?>
-		<h2>Register Team</h2>
+		<h2>Register</h2>
 		<p>Congratulations, you are now registered, <a href="login.php">click here</a> to continue to login</p>
 <?php
 
 		} else {
-			printf("Error: %s\n", $mysqli->error);
+			$error = true;
+			array_push($errors, $mysqli->error);
 		}
 	}
 }

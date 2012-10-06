@@ -1,3 +1,4 @@
+#!/usr/bin/php
 <?php
 
 include('config.php');
@@ -24,8 +25,9 @@ else
 $query = 'CREATE TABLE ' . $mysql_prefix . 'player
 	(
 		id INT(11) NOT NULL AUTO_INCREMENT,
-		login VARCHAR(255),
-		password CHAR(50),
+		login VARCHAR(255) UNIQUE,
+		password CHAR(64),
+		salt CHAR(64),
 		name VARCHAR(255),
 		ircnick VARCHAR(255),
 		email VARCHAR(255),

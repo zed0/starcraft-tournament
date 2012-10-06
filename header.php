@@ -14,11 +14,11 @@
 if (isset($login['id'])) {
 ?>
 			<li><a href="report.php">Report result</a></li>
-			<li><a href="logout.php">Logout</a></li>
+			<li><a href="logout.php">Logout of <?echo($login['player'])?></a></li>
 <?php
 } else {
 ?> 
-			<li><a href="register.php">Register Team</a></li>
+			<li><a href="register.php">Register</a></li>
 			<li><a href="login.php">Login</a></li>
 <?php
 }
