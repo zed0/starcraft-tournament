@@ -35,7 +35,7 @@ if ($result = $mysqli->query("SELECT * FROM " . $mysql_prefix . "player WHERE id
 	printf("Error: %s\n", $mysqli->error);
 }
 
-if ($result = $mysqli->query("SELECT winner, loser, time FROM " . $mysql_prefix . "game WHERE winner=".$player." OR loser=".$player, MYSQLI_STORE_RESULT)) {
+if ($result = $mysqli->query("SELECT id, winner, loser, time FROM " . $mysql_prefix . "game WHERE winner=".$player." OR loser=".$player, MYSQLI_STORE_RESULT)) {
 	if ($result->num_rows == 0) {
 ?>
 		<h3>Games</h3>
@@ -50,6 +50,7 @@ if ($result = $mysqli->query("SELECT winner, loser, time FROM " . $mysql_prefix 
 				<th>Winner</th>
 				<th>Loser</th>
 				<th>Time</th>
+				<th>Replay</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -61,6 +62,7 @@ if ($result = $mysqli->query("SELECT winner, loser, time FROM " . $mysql_prefix 
 						<td><a href="player.php?player=<?php echo $row['winner'] ?>" ><?php echo getNameFromId($row['winner']) ?></a></td>
 						<td><a href="player.php?player=<?php echo $row['loser'] ?>" ><?php echo getNameFromId($row['loser']) ?></a></td>
 						<td><?php echo date('d/m/y', $row['time']) ?></td>
+						<td><a href="replays/<? echo(hash('sha1', $row['id']))?>.sc2replay">link</a></td>
 					</tr>
 <?php
 			}

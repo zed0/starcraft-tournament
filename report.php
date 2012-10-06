@@ -15,9 +15,16 @@ if(isset($_POST['submit'])) {
 		array_push($errors, "You are trying to report a game you weren't in.");
 		$error = true;
 	}
-	elseif(array_diff_assoc($players, array_unique($players)))
+	if(array_diff_assoc($players, array_unique($players)))
 	{
 		array_push($errors, "There is a duplicate player in the reported game.");
+		$error = true;
+	}
+	if(!isset($_FILES['replay'])
+		|| $_FILES['replay']['error'] != UPLOAD_ERR_OK
+		|| strcasecmp(pathinfo($_FILES['replay']['name'], PATHINFO_EXTENSION),'sc2replay')!=0)
+	{
+		array_push($errors, "Please upload a .sc2replay file.");
 		$error = true;
 	}
 	if($error == false)
@@ -26,7 +33,11 @@ if(isset($_POST['submit'])) {
 			'".$mysqli->real_escape_string($players[0])."',
 			'".$mysqli->real_escape_string($players[1])."',
 			'".time()."'
-		)")) {
+		)"))
+		{
+			$replay_location = $replay_dir . '/' . hash('sha1',$mysqli->insert_id) . '.sc2replay';
+			move_uploaded_file($_FILES['replay']['tmp_name'], $replay_location);
+			chmod($replay_location, 0644);
 ?>
 		<h2>Report Result</h2>
 		<p>Congratulations, you have reported the game successfully.</p>
@@ -44,7 +55,7 @@ if(isset($_POST['submit'])) {
 		echo '<p class="error">Please correct the following errors:</p><ul class="error"><li>'.implode('</li><li>', $errors).'</li></ul>';
 	}
 ?>
-		<form action="" method="post">
+		<form action="" method="post" enctype="multipart/form-data">
 			<label for="winner">
 				<span>Winner:</span>
 				<select id="winner" name="winner">
@@ -80,6 +91,10 @@ if ($result = $mysqli->query("SELECT id, name FROM " . $mysql_prefix . "player O
 
 ?>
 				</select>
+			</label>
+			<label for="replay">
+				<span>Replay:</span>
+				<input type="file" name="replay" id="replay"/>
 			</label>
 			<p><input type="submit" value="Submit" name="submit" /></p>
 		</form>
