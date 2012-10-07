@@ -7,3 +7,4 @@ $mysql_prefix = 'tournament_';
 
 $title = 'UWCS Starcraft Tournament';
 $cookie_name = 'tournamentlogin';
+$replay_dir = 'replays';

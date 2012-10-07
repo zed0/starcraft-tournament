@@ -98,6 +98,11 @@ fieldset {
 	margin: 10px;
 }
 
+.details {
+	font-size: small;
+	color: #66AAFF;
+}
+
 .teammembers {
 	margin: 0;
 	padding: 0;
@@ -107,6 +112,10 @@ fieldset {
 	float: left;
 	padding: 10px;
 	list-style: none;
+}
+
+table {
+	width: 100%;
 }
 
 dt {

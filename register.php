@@ -35,22 +35,30 @@ if (isset($_POST['submit'])) {
 		array_push($errors, "Enter an email of at least 3 characters");
 	}
 
-	if (isset($_POST['irc']) && strlen(trim($_POST['irc'])) > 2) {
-		$irc = $_POST['irc'];
+	if (isset($_POST['sc2name']) && strlen(trim($_POST['sc2name'])) > 1) {
+		$sc2name = $_POST['sc2name'];
 	} else {
 		$error = true;
-		array_push($errors, "Enter an IRC nick of at least 3 characters");
+		array_push($errors, "Enter an SC2 name of at least 2 characters");
+	}
+
+	if (isset($_POST['code']) && is_numeric($_POST['code'])) {
+		$code = $_POST['code'];
+	} else {
+		$error = true;
+		array_push($errors, "Enter a numeric SC2 code");
 	}
 
 	if (!$error) {
 		$salt = hash('sha256', mcrypt_create_iv(20));
 		$passwordHash = hash('sha256', $salt.$password);
-		if ($result = $mysqli->query("INSERT INTO " . $mysql_prefix . "player(login, password, salt, name, ircnick, email) VALUES (
+		if ($result = $mysqli->query("INSERT INTO " . $mysql_prefix . "player(login, password, salt, name, sc2name, code, email) VALUES (
 			'".$mysqli->real_escape_string($login)."',
 			'".$passwordHash."',
 			'".$salt."',
 			'".$mysqli->real_escape_string($name)."',
-			'".$mysqli->real_escape_string($irc)."',
+			'".$mysqli->real_escape_string($sc2name)."',
+			'".$mysqli->real_escape_string($code)."',
 			'".$mysqli->real_escape_string($email)."')")) {
 
 ?>
@@ -88,14 +96,21 @@ if (!isset($_POST['submit']) || $error) {
 			<label for="name">
 				<span>Name:</span>
 				<input type="text" id="name" name="name" value="<?php echo (isset($name) ? $name : '') ?>" />
+				<span class="details">(as you wish it to be displayed on the site)</span>
 			</label>
 			<label for="email">
 				<span>Email:</span>
 				<input type="text" id="email" name="email" value="<?php echo (isset($email) ? $email : '') ?>" />
+				<span class="details">(will not be displayed)</span>
 			</label>
-			<label for="irc">
-				<span>IRC Nick:</span>
-				<input type="text" id="irc" name="irc" value="<?php echo (isset($irc) ? $irc : '') ?>" />
+			<label for="sc2name">
+				<span>SC2 Name:</span>
+				<input type="text" id="sc2name" name="sc2name" value="<?php echo (isset($sc2name) ? $sc2name : '') ?>" />
+			</label>
+			<label for="code">
+				<span>SC2 Code:</span>
+				<input type="text" id="code" name="code" value="<?php echo (isset($code) ? $code : '') ?>" />
+				<span class="details">(the number after your name in StarCraft II)</span>
 			</label>
 			<p><input type="submit" value="Submit" name="submit" /></p>
 		</form>

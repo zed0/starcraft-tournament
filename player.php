@@ -21,12 +21,10 @@ if ($result = $mysqli->query("SELECT * FROM " . $mysql_prefix . "player WHERE id
 ?>
 	<h2>Player details: <?php echo htmlspecialchars($row['name']) ?></h2>
 	<dl>
-		<dt>Name</dt>
-		<dd><?php echo htmlspecialchars($row['name']) ?></dd>
-		<dt>IRC nick</dt>
-		<dd><?php echo htmlspecialchars($row['ircnick']) ?></dd>
-		<dt>email</dt>
-		<dd><?php echo htmlspecialchars($row['email']) ?></dd>
+		<dt>SC2 Name</dt>
+		<dd><?php echo htmlspecialchars($row['sc2name']) ?></dd>
+		<dt>SC2 Code</dt>
+		<dd><?php echo htmlspecialchars($row['code']) ?></dd>
 	</dl>
 	<div style="clear: both"></div>
 <?php
@@ -49,7 +47,7 @@ if ($result = $mysqli->query("SELECT id, winner, loser, time FROM " . $mysql_pre
 			<tr>
 				<th>Winner</th>
 				<th>Loser</th>
-				<th>Time</th>
+				<th>Date</th>
 				<th>Replay</th>
 			</tr>
 		</thead>

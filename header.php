@@ -10,6 +10,7 @@
 
 		<ul id="nav">
 			<li><a href=".">Standings</a></li>
+			<li><a href="matches.php">Matches</a></li>
 <?php
 if (isset($login['id'])) {
 ?>

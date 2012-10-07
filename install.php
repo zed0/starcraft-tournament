@@ -29,7 +29,8 @@ $query = 'CREATE TABLE ' . $mysql_prefix . 'player
 		password CHAR(64),
 		salt CHAR(64),
 		name VARCHAR(255),
-		ircnick VARCHAR(255),
+		sc2name VARCHAR(255),
+		code VARCHAR(255),
 		email VARCHAR(255),
 		PRIMARY KEY(id)
 	)';
