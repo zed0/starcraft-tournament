@@ -58,21 +58,8 @@ if(isset($_POST['submit'])) {
 		<form action="" method="post" enctype="multipart/form-data">
 			<label for="winner">
 				<span>Winner:</span>
-				<select id="winner" name="winner">
-<?php
-
-if ($result = $mysqli->query("SELECT id, name FROM " . $mysql_prefix . "player ORDER BY name ASC LIMIT 0, 150", MYSQLI_USE_RESULT)) {
-	while ($row = $result->fetch_assoc()) {
-?>
-					<option value="<?php echo $row['id']; ?>"><?php echo htmlspecialchars($row['name']); ?></option>
-<?php
-	}
-} else {
-	printf("Error: %s\n", $mysqli->error);
-}
-
-?>
-				</select>
+				<?echo($login['player'])?>
+				<input type="hidden" id="winner" name="winner" value="<?echo($login['id'])?>" />
 			</label>
 			<label for="loser">
 				<span>Loser:</span>
