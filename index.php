@@ -5,6 +5,10 @@ include 'common.php';
 include 'header.php';
 
 ?>
+		<br />
+		<br />
+		Welcome to the <a href="http://uwcs.co.uk">UWCS</a> friendly Starcraft II ladder.<br />
+		This is a ladder for Warwick students; if you are a Warwick student and would like to join the ladder then just register above, have a read over the rules and join the channel "UWCS" in the Starcraft II client.
 		<h2>Current Standings</h2>
 		
 		<table>
