@@ -11,7 +11,7 @@
 		<ul id="nav">
 			<li><a href=".">Standings</a></li>
 			<li><a href="matches.php">Matches</a></li>
-			<li><a href="faq.php">FAQ</a></li>
+			<li><a href="rules.php">Rules</a></li>
 <?php
 if (isset($login['id'])) {
 ?>

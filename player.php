@@ -32,16 +32,26 @@ if ($result = $mysqli->query("SELECT * FROM " . $mysql_prefix . "player WHERE id
 } else {
 	printf("Error: %s\n", $mysqli->error);
 }
-
+?>
+	<h2>Games</h2>
+<?
+if ($result = $mysqli->query("SELECT SUM(CASE WHEN winner = " . $player . " THEN 1 ELSE 0 END) AS wins, SUM(CASE WHEN loser = " . $player . " THEN 1 ELSE 0 END) AS losses FROM " . $mysql_prefix . "game WHERE winner=".$player." OR loser = ".$player, MYSQLI_USE_RESULT)) {
+	while ($row = $result->fetch_assoc()) {
+?>
+	<h3>Wins <?echo($row['wins']);?></h3>
+	<h3>Losses <?echo($row['losses']);?></h3>
+<?php
+	}
+} else {
+	printf("Error: %s\n", $mysqli->error);
+}
 if ($result = $mysqli->query("SELECT id, winner, loser, time FROM " . $mysql_prefix . "game WHERE winner=".$player." OR loser=".$player." ORDER BY time DESC", MYSQLI_STORE_RESULT)) {
 	if ($result->num_rows == 0) {
 ?>
-		<h3>Games</h3>
 		<p>No games played</p>
 <?php
 	} else {
 ?>
-	<h3>Games</h3>
 	<table>
 		<thead>
 			<tr>
