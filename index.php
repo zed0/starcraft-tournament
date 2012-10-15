@@ -25,17 +25,18 @@ include 'header.php';
 <?php
 
 if ($result = $mysqli->query(
-	"SELECT id, name, wins, losses, (3*wins+losses) as rating FROM (
-		SELECT
-		p.id as id,
-		p.name as name,
-		SUM(CASE WHEN g.winner = p.id THEN 1 ELSE 0 END) as wins,
-		SUM(CASE WHEN g.loser = p.id THEN 1 ELSE 0 END) as losses
-		FROM " . $mysql_prefix . "player p, " . $mysql_prefix . "game g
-		GROUP BY id
-	) AS subtable
-	ORDER BY rating DESC
-	", MYSQLI_USE_RESULT)) {
+	"SELECT
+		player.id,
+		player.name AS name,
+		SUM(CASE WHEN game.winner = player.id THEN 1 ELSE 0 END) AS wins,
+		SUM(CASE WHEN game.loser = player.id THEN 1 ELSE 0 END) AS losses,
+		SUM(CASE WHEN game.winner = player.id THEN 3 WHEN game.loser = player.id THEN 1 ELSE 0 END) as rating
+	FROM " . $mysql_prefix . "player AS player
+	LEFT JOIN " . $mysql_prefix . "game AS game
+	ON player.id=game.winner OR player.id=game.loser
+	GROUP BY player.id
+	ORDER BY rating DESC"
+	, MYSQLI_USE_RESULT)) {
 	$rank = 0;
 	$backup = 0;
 	$score = INF;
