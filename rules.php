@@ -17,6 +17,10 @@ include 'header.php';
 		You should join the channel "UWCS" within StarCraft II and arrange matches with each other there.<br />
 		Each player's SC2 character name and character code are also listed on their profile page so you can add them within the game if you are having trouble tracking them down.<br />
 		If you are keen then there is also a channel called #starcraft on <a href="http://uwcs.co.uk/cms/about/services/irc/">our irc server</a>.
+		<h3 id="who">Who should I play against?</h3>
+		You should try to play against every other person each season.  That said this is mostly intended to be a friendlyish tournament so you should also feel free to play whoever is around.
+		<h3 id="when">How long is a season?</h3>
+		Each season lasts just under a term.  The season ends a week before the end of each term when there will be play offs for the top 4 finishers.
 		<h3 id="maps">Which maps should we use?</h3>
 		All games should be 1v1 melee on the faster setting.<br />
 		The map pool is:
