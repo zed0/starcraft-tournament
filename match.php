@@ -145,6 +145,7 @@ if ($result = $mysqli->query("SELECT * FROM " . $mysql_prefix . "game WHERE id="
 				</tr>
 <?
 			$obsString = "";
+			$obsCount = 0;
 			foreach($players as $value) {
 				if ($value['isObs']) {
 					if ($obsString == "")
