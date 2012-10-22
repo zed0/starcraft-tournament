@@ -144,6 +144,7 @@ if ($result = $mysqli->query("SELECT * FROM " . $mysql_prefix . "game WHERE id="
 					<th>Average APM</th>
 				</tr>
 <?
+			$obsString = "";
 			foreach($players as $value) {
 				if ($value['isObs']) {
 					if ($obsString == "")
